@@ -1,4 +1,4 @@
-# PREPARE SYSTEM
+# PREPARE SYSTEM (raspberrypiOS!)
 
 sudo raspi-config
 
