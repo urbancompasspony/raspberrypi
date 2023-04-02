@@ -1,0 +1,17 @@
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    eth0:
+      dhcp4: true
+      optional: true
+  wifis:
+    wlan0:
+      dhcp4: true
+      addresses:
+      - 192.168.4.1/24
+      optional: true
+      access-points:
+        "ctOS RPi":
+          password: "5V06auso"
+          mode: ap
