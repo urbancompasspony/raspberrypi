@@ -48,6 +48,7 @@ sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 sudo nano /etc/rc.local
 iptables-restore < /etc/iptables.ipv4.nat
+sudo systemctl daemon-reload
 
 sudo brctl addbr br0
 sudo brctl addif br0 eth0
