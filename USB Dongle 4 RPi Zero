@@ -1,0 +1,14 @@
+# Inside config.txt insert in the end of file:
+
+dtoverlay=dwc2
+
+# Inside cmdline.txt after rootwait insert:
+
+modules-load=dwc2,g_ether
+
+# Turn SSH on without monitor attached: inside /boot that is inside microSD Card create a empty "ssh" file.
+You can do it with:
+
+$ touch ssh
+
+Use sudo/root if lacks permission to do this.
