@@ -1,0 +1,16 @@
+# Manually
+
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+country=BR
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+network={
+	ssid="MyWiFiNetwork"
+	psk="aVeryStrongPassword"
+	key_mgmt=WPA-PSK
+}
+
+sudo reboot
+
+# This can be set through raspi-config too!
