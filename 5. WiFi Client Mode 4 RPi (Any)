@@ -15,3 +15,8 @@ network={
 
 sudo reboot
 
+# To set a static IP:
+sudo nano /etc/dhcpcd.conf
+interface wlan0
+request 192.168.75.10
+(check if IP is correct!)
