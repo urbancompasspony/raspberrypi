@@ -1,2 +1,6 @@
 # raspberrypi
-Some scripts and tweaks for any raspberry pi!
+
+TIPS AND TRICKS
+
+Burn and first run the system!
+Then you can modify the boot.conf and cmdline.txt
