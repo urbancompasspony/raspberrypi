@@ -21,8 +21,9 @@ sudo reboot
 sudo nano /etc/dhcpcd.conf
 
 interface wlan0
-static ip_address=192.168.11.13
-#static routers=192.168.11.1
-#static domain_name_servers=8.8.8.8
+static ip_address=192.168.75.10
+static routers=192.168.75.48
+static domain_name_servers=192.168.75.48
 
 (check if IPs are correct!)
+[192.168.75.48 is for gateway and dns for wifi hotspot mobile]
