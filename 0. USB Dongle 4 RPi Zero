@@ -6,9 +6,5 @@ dtoverlay=dwc2
 
 modules-load=dwc2,g_ether
 
-# Turn SSH on without monitor attached: inside /boot that is inside microSD Card create a empty "ssh" file.
-You can do it with:
-
-$ touch ssh
-
-Use sudo/root if lacks permission to do this.
+# Turn SSH on without monitor attached:
+Inside /bootfs (on microSD Card) create an empty "ssh" file.
