@@ -1,4 +1,4 @@
-(NOT RECOMMENDED - EDIT SETTINGS WITH RPI-IMAGER INSTEAD FOR AN EASY APPROACH!)
+[ Using RPI-IMAGER is not recommended - Maybe crash this!!! ]
 
 sudo apt install hostapd dnsmasq
 sudo DEBIAN_FRONTEND=noninteractive apt install -y netfilter-persistent iptables-persistent
