@@ -1,3 +1,5 @@
+DOES NOT WORK WITH 5. WiFi Client Mode 4 RPi (Any)!
+
 # Inside config.txt insert in the end of file:
 
 dtoverlay=dwc2
