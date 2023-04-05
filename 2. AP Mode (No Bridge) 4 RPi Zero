@@ -1,3 +1,5 @@
+(NOT RECOMMENDED - EDIT SETTINGS WITH RPI-IMAGER INSTEAD FOR AN EASY APPROACH!)
+
 sudo apt install hostapd dnsmasq
 sudo DEBIAN_FRONTEND=noninteractive apt install -y netfilter-persistent iptables-persistent
 
