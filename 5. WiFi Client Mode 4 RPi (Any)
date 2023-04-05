@@ -17,6 +17,10 @@ sudo reboot
 
 # To set a static IP:
 sudo nano /etc/dhcpcd.conf
+
 interface wlan0
-request 192.168.75.10
-(check if IP is correct!)
+static ip_address=192.168.11.13
+static routers=192.168.11.1
+static domain_name_servers=8.8.8.8
+
+(check if IPs are correct!)
