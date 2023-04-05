@@ -2,9 +2,12 @@
 
 dtoverlay=dwc2
 
-# Inside cmdline.txt after rootwait insert:
+# Inside cmdline.txt right before rootwait insert:
 
 modules-load=dwc2,g_ether
+
+Will look something like:
+....fsck.repair=yes modules-load=dwc2,g_ether rootwait quiet....
 
 # Turn SSH on without monitor attached:
 Inside /bootfs (on microSD Card) create an empty "ssh" file.
