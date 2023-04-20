@@ -1,0 +1,12 @@
+First identify network card:
+$ ip a
+
+# Add these lines to respective files!
+# /etc/network/interfaces
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+
+# Then:
+$ ifup eth0
