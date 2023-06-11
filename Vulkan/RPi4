@@ -1,0 +1,19 @@
+$ cd ~
+$ git clone -b main https://gitlab.freedesktop.org/mesa/mesa.git mesa_vulkan
+
+$ cd mesa_vulkan
+$ mkdir builddir
+
+$ CFLAGS="-mcpu=cortex-a72" \
+CXXFLAGS="-mcpu=cortex-a72" \
+meson builddir --prefix /usr \
+-D platforms=auto \
+-D vulkan-drivers=broadcom \
+-D gallium-drivers=kmsro,v3d,vc4,zink \
+-D buildtype=plain \
+-Dshared-llvm=enabled \
+-Dllvm=true \
+-Ddri3=enabled 
+
+$ ninja -C builddir/ -j4
+$ sudo ninja -C build install
