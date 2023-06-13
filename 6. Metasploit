@@ -1,16 +1,22 @@
-sudo apt update
-sudo apt upgrade
+$ sudo apt-get remove ruby1.9.1 libruby1.9.1
+$ dpkg -l | grep ruby
+$ sudo apt-get purge ruby1.9.1 ruby1.8
+--
+$ sudo apt-get install rbenv
+$ rbenv rehash
+--
+$ apt-get install git ruby rubygems ruby-pg postgresql-common libpq-dev libpcap0.8 bundler ruby-pcaprub libpcap0.8 libpcap0.8-dev libsqlite3-dev 
+$ sudo gem install bundler
 
-sudo apt install curl wget gnupg2
+$ cd $HOME; git clone https://github.com/rapid7/metasploit-framework
+$ cd metasploit-framework; ./msfupdate
 
-curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
+$ bundle install
 
-chmod +x msfinstall
-./msfinstall
+...
+Bundle complete! 16 Gemfile dependencies, 86 gems now installed.
+...
 
-msfdb init
+$ ./msfconsole 
 
-msfconsole --version
-msfupdate
-
-msfconsole
+IF NEEDED, RUN EVERYTHING WITH SUDO!
