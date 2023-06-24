@@ -1,3 +1,6 @@
+WIFI USB:
+sudo apt install firmware-ath9k-htc firmware-b43-installer
+
 network:
   version: 2
   renderer: NetworkManager
