@@ -3,12 +3,12 @@ sudo apt install firmware-ath9k-htc firmware-b43-installer linux-modules-extra-r
 
 network:
   version: 2
-  renderer: NetworkManager
   ethernets:
     eth0:
       dhcp4: true
       optional: true
   wifis:
+  renderer: NetworkManager
     wlan0:
       dhcp4: true
       addresses:
