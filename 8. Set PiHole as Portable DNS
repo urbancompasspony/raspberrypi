@@ -17,6 +17,10 @@ nameserver 127.0.0.53
 options edns0 trust-ad
 search localdomain
 
+# Edit /etc/hosts
+127.0.0.1 HOSTNAMEHERE!
+(because of sudo hostname not known error)
+
 # PiHole
 
 Configure Container as HOST!
