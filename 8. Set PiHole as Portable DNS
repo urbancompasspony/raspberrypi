@@ -59,6 +59,7 @@ sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
 --network host \
 --hostname=pihole \
 --no-healthcheck \
+-e SERVERIP=127.0.0.1 \
 -e WEBPASSWORD="******" \
 -v /etc/localtime:/etc/localtime:ro \
 -v /srv/containers/pihole/etc/:/etc/pihole \
