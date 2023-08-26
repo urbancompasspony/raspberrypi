@@ -24,12 +24,23 @@ network:
     eth0:
       dhcp4: true
       optional: true
+  wifis:
+    renderer: NetworkManager
     wlxd037457c32f3:
       dhcp4: true
       optional: true
+      access-points:
+        "Apto 300 A":
+          password: "******"
     wlxd03745867865:
       dhcp4: true
+      addresses:
+      - 192.168.4.1/24
       optional: true
+      access-points:
+        "ctOS PiHole":
+          password: "******"
+          mode: ap
   version: 2
 
 # (4) # PiHole
