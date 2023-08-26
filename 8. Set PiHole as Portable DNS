@@ -58,6 +58,8 @@ sudo usermod -aG docker ubuntu
 
 sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
 
+docker stop pihole; docker rm pihole
+
 docker run -d \
 --name=pihole \
 --network host \
