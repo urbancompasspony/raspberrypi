@@ -45,9 +45,31 @@ network:
 
 # (4) # PiHole
 
-Configure Container as HOST!
+sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
 
-# Set IP Host of PiHole to ""
-# Set Interface of PiHole to ""
+  docker run -d \
+--name=pihole \
+--network host \
+--hostname=pihole \
+--no-healthcheck \
+-e WEBPASSWORD="******" \
+-v /etc/localtime:/etc/localtime:ro \
+-v /srv/containers/pihole/etc/:/etc/pihole \
+-v /srv/containers/pihole/dnsmasq.d/:/etc/dnsmasq.d \
+-p 80:80 \
+-p 443:443 \
+-p 67:67/tcp \
+-p 67:67/udp \
+-p 53:53/tcp \
+-p 53:53/udp \
+--restart=unless-stopped \
+pihole/pihole:latest
+
+docker start pihole
+docker exec pihole rm /etc/pihole/pihole-FTL.conf
+docker exec pihole touch /etc/pihole/pihole-FTL.conf
+docker exec pihole bash -c "echo 'LOCAL_IPV4=0.0.0.0' >> /etc/pihole/pihole-FTL.conf"
+docker exec pihole bash -c "echo 'RATE_LIMIT=0/0' >> /etc/pihole/pihole-FTL.conf"
+docker restart pihole
 
 Profit!
