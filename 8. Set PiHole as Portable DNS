@@ -1,4 +1,4 @@
-# Ubuntu Server
+# For Ubuntu Server
 
 $ sudo systemctl stop systemd-resolved
 $ sudo systemctl disable systemd-resolved
@@ -11,6 +11,11 @@ $ sudo nano /etc/resolv.conf
 nameserver 127.0.0.1
 search ubuntu
 (set the same hostname!)
+
+# Original resolv.conf (if needed on emergency):
+nameserver 127.0.0.53
+options edns0 trust-ad
+search localdomain
 
 # PiHole
 
