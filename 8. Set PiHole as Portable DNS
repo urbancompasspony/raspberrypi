@@ -98,8 +98,9 @@ sudo systemctl enable hostapd
 
 sudo nano /etc/hostapd/hostapd.conf
 
-
-interface=wlan0
+wpa_passphrase=5V06auso
+ssid=ctOS PiHole
+interface=wlxd03745867865
 driver=nl80211
 hw_mode=g
 channel=1
@@ -107,33 +108,16 @@ ieee80211d=1
 country_code=DE
 ieee80211n=1
 wmm_enabled=1
-ssid=yourSSID
 macaddr_acl=0
 auth_algs=1
 ignore_broadcast_ssid=0
 wpa=2
-wpa_passphrase=yourpassphrase
 wpa_key_mgmt=WPA-PSK
 rsn_pairwise=CCMP
 
 sudo nano /etc/default/hostapd
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
-network:
- version: 2
- renderer: networkd
- ethernets:
- eth0:
- dhcp4: no
- wlan0:
- dhcp4: no
- bridges:
- br0:
- interfaces:
- - eth0
- - wlan0
- addresses:
- - 192.168.1.xxx/24
- gateway4: 192.168.1.x
- nameservers:
- addresses: [1.1.1.1, 1.0.0.1]
+          routes:
+            - to: default
+              via: yourdefaultgatewayaddress
