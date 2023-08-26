@@ -5,6 +5,7 @@ network:
       dhcp4: true
       optional: true
   wifis:
+    renderer: NetworkManager
     wlan0:
       dhcp4: true
       optional: true
