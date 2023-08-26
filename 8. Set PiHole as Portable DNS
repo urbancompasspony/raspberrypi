@@ -17,9 +17,8 @@ nameserver 127.0.0.53
 options edns0 trust-ad
 search localdomain
 
-# Edit /etc/hosts
-127.0.0.1 HOSTNAMEHERE!
-(because of sudo hostname not known error)
+# Edit /etc/hosts and add:
+127.0.0.1 ubuntu
 
 # PiHole
 
