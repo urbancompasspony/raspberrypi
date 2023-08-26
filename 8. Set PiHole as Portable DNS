@@ -1,13 +1,10 @@
-# For Ubuntu Server
+# (1) # For Ubuntu Server
 
 $ sudo systemctl stop systemd-resolved
 $ sudo systemctl disable systemd-resolved
 $ sudo unlink /etc/resolv.conf
 
 Then edit /etc/resolv.conf creating a new file and put this inside:
-
-$ sudo nano /etc/resolv.conf
-
 nameserver 127.0.0.1
 search ubuntu
 (set the same hostname!)
@@ -17,9 +14,29 @@ nameserver 127.0.0.53
 options edns0 trust-ad
 search localdomain
 
-# Edit /etc/hosts and add:
+# (2) # Edit /etc/hosts and add:
 127.0.0.1 ubuntu
 
-# PiHole
+# (3) # To /etc/netplan/50-cloud-init.yaml:
+
+network:
+  ethernets:
+    eth0:
+      dhcp4: true
+      optional: true
+    wlxd037457c32f3:
+      dhcp4: true
+      optional: true
+    wlxd03745867865:
+      dhcp4: true
+      optional: true
+  version: 2
+
+# (4) # PiHole
 
 Configure Container as HOST!
+
+# Set IP Host of PiHole to ""
+# Set Interface of PiHole to ""
+
+Profit!
