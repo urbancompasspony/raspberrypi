@@ -51,6 +51,8 @@ network:
 # (4) # Remove DNSMASQ
 sudo apt purge dnsmasq-base
 sudo killall dnsmasq
+TURN ON DHCP ON PIHOLE!
+Set IP and Gateway 192.168.4.1...etc.
 
 # (5) # PiHole
 
@@ -58,30 +60,24 @@ sudo usermod -aG docker ubuntu
 
 sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
 
-docker stop pihole; docker rm pihole
+docker stop pihole
+docker rm pihole
 
 docker run -d \
 --name=pihole \
 --network host \
 --hostname=pihole \
 --no-healthcheck \
+--restart=unless-stopped \
+--cap-add=NET_ADMIN \
+--privileged \
 -e INTERFACE=wlxd03745867865 \
 -e DNSMASQ_LISTENING=single \
--e DNSMASQ_USER=root \
--e PIHOLE_UID=0 \
 -e SERVERIP=127.0.0.1 \
 -e WEBPASSWORD="5V06auso" \
 -v /etc/localtime:/etc/localtime:ro \
 -v /srv/containers/pihole/etc/:/etc/pihole \
 -v /srv/containers/pihole/dnsmasq.d/:/etc/dnsmasq.d \
--p 80:80 \
--p 443:443 \
--p 67:67/tcp \
--p 67:67/udp \
--p 53:53/tcp \
--p 53:53/udp \
---restart=unless-stopped \
---cap-add=NET_ADMIN \
 pihole/pihole:latest
 
 Profit!
