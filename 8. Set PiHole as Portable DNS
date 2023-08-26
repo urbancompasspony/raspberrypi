@@ -74,7 +74,7 @@ docker run -d \
 -e INTERFACE=wlxd03745867865 \
 -e DNSMASQ_LISTENING=single \
 -e SERVERIP=127.0.0.1 \
--e WEBPASSWORD="5V06auso" \
+-e WEBPASSWORD="*****" \
 -v /etc/localtime:/etc/localtime:ro \
 -v /srv/containers/pihole/etc/:/etc/pihole \
 -v /srv/containers/pihole/dnsmasq.d/:/etc/dnsmasq.d \
