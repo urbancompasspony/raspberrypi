@@ -1,0 +1,12 @@
+# Ubuntu Server
+
+$ sudo systemctl stop systemd-resolved
+$ sudo systemctl disable systemd-resolved
+$ sudo unlink /etc/resolv.conf
+
+Then edit /etc/resolv.conf creating a new file and put this inside:
+
+$ sudo nano /etc/resolv.conf
+
+nameserver 127.0.0.1
+search HOSTNAME
