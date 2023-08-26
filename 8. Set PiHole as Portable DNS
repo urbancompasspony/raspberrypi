@@ -118,6 +118,25 @@ rsn_pairwise=CCMP
 sudo nano /etc/default/hostapd
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
+network:
+    version: 2
+    ethernets:
+       eth0:
+          dhcp4: false
+          dhcp6: false
+       wlan0:
+          dhcp4: false
+          dhcp6: false
+    bridges:     
+        br0:
+          interfaces: [eth0,wlan0]
+          addresses: [yourStaticAddressofPi/yournetmask]
           routes:
             - to: default
               via: yourdefaultgatewayaddress
+          mtu: 1500
+          nameservers:
+            search: [yourlocaldomain.lan]
+            addresses: [yourIP4addressforDNSserver]
+          dhcp4: no
+          dhcp6: no
