@@ -17,6 +17,11 @@ search localdomain
 # (2) # Edit /etc/hosts and add:
 127.0.0.1 ubuntu
 
+# Edit /etc/NetworkManager/NetworkManager.conf:
+[main]
+plugins=ifupdown,keyfile
+dns=none
+
 # (3) # To /etc/netplan/50-cloud-init.yaml:
 
 network:
