@@ -83,4 +83,8 @@ docker run -d \
 -v /srv/containers/pihole/dnsmasq.d/:/etc/dnsmasq.d \
 pihole/pihole:latest
 
+# (6) # Inside PiHole
+
+Set DHCP Server and set a new router, maybe 192.168.4.254
+
 Profit!
