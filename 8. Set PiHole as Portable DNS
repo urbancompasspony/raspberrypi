@@ -48,7 +48,11 @@ network:
           mode: ap
   version: 2
 
-# (4) # PiHole
+# (4) # Remove DNSMASQ
+sudo apt purge dnsmasq-base
+sudo killall dnsmasq
+
+# (5) # PiHole
 
 sudo usermod -aG docker ubuntu
 
@@ -73,6 +77,7 @@ sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
 --restart=unless-stopped \
 pihole/pihole:latest
 
+???
 docker start pihole
 docker exec pihole rm /etc/pihole/pihole-FTL.conf
 docker exec pihole touch /etc/pihole/pihole-FTL.conf
