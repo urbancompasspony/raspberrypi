@@ -16,5 +16,5 @@ network:
       optional: true
       access-points:
         "ctOS 3G":
-          password: "5V06auso"
+          password: "*******"
           mode: ap
