@@ -54,6 +54,9 @@ sudo killall dnsmasq
 TURN ON DHCP ON PIHOLE!
 Set IP and Gateway 192.168.4.1...etc.
 
+Create and add to /srv/containers/pihole/dnsmasq.d/99-dns-bind.conf :
+bind-interfaces
+
 # (5) # PiHole
 
 sudo usermod -aG docker ubuntu
