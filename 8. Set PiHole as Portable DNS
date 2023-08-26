@@ -45,6 +45,8 @@ network:
 
 # (4) # PiHole
 
+sudo usermod -aG docker ubuntu
+
 sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
 
   docker run -d \
