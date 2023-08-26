@@ -58,13 +58,16 @@ sudo usermod -aG docker ubuntu
 
 sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
 
-  docker run -d \
+docker run -d \
 --name=pihole \
 --network host \
 --hostname=pihole \
 --no-healthcheck \
+-e INTERFACE=wlxd03745867865 \
+-e DNSMASQ_USER=root \
+-e PIHOLE_UID=0 \
 -e SERVERIP=127.0.0.1 \
--e WEBPASSWORD="******" \
+-e WEBPASSWORD="5V06auso" \
 -v /etc/localtime:/etc/localtime:ro \
 -v /srv/containers/pihole/etc/:/etc/pihole \
 -v /srv/containers/pihole/dnsmasq.d/:/etc/dnsmasq.d \
@@ -75,14 +78,7 @@ sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
 -p 53:53/tcp \
 -p 53:53/udp \
 --restart=unless-stopped \
+--cap-add=NET_ADMIN \
 pihole/pihole:latest
-
-???
-docker start pihole
-docker exec pihole rm /etc/pihole/pihole-FTL.conf
-docker exec pihole touch /etc/pihole/pihole-FTL.conf
-docker exec pihole bash -c "echo 'LOCAL_IPV4=0.0.0.0' >> /etc/pihole/pihole-FTL.conf"
-docker exec pihole bash -c "echo 'RATE_LIMIT=0/0' >> /etc/pihole/pihole-FTL.conf"
-docker restart pihole
 
 Profit!
