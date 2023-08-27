@@ -89,6 +89,10 @@ network:
 # routes = gateway4!
 # addresses = dns!
 
+To remove bridge:
+sudo ip link set br0 down
+sudo ip link delete br0 type bridge
+
 # (6) # PiHole
 
 sudo usermod -aG docker ubuntu
