@@ -14,8 +14,120 @@ nameserver 127.0.0.53
 options edns0 trust-ad
 search localdomain
 
+# Temp to have network:
+nameserver 1.0.0.1
+options edns0 trust-ad
+search localdomain
+
 # (2) # Edit /etc/hosts and add:
 127.0.0.1 ubuntu
+
+# (3) # Check if there is any process on 53 port:
+$ sudo lsof -i -P -n | grep 53
+$ netstat -atun
+
+# (4) # To /etc/netplan/50-cloud-init.yaml:
+
+sudo apt install hostapd
+sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
+
+sudo nano /etc/hostapd/hostapd.conf
+
+ssid=ctOS PiHole
+wpa_passphrase=5V06auso
+interface=wlxd03745867865
+driver=nl80211
+hw_mode=g
+channel=1
+ieee80211d=1
+country_code=DE
+ieee80211n=1
+wmm_enabled=1
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+
+sudo nano /etc/default/hostapd
+DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+# (5) # Edit netplan:
+
+sudo nano /etc/netplan TAB:
+
+network:
+  version: 2
+  ethernets:
+    enx001e101f0000:
+      dhcp4: false
+      dhcp6: false
+    wlxd03745867865:
+      dhcp4: false
+      dhcp6: false
+  bridges:
+    br0:
+      interfaces: [enx001e101f0000,wlxd03745867865]
+      addresses: [192.168.4.1/24]
+      routes:
+        - to: default
+          via: 192.168.4.1
+      mtu: 1500
+      nameservers:
+        search: [pihole.lan]
+        addresses: [192.168.4.1]
+      dhcp4: no
+      dhcp6: no
+
+# (6) # PiHole
+
+sudo usermod -aG docker ubuntu
+
+sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
+
+nano pihole:
+docker stop pihole
+docker rm pihole
+docker run -d \
+--name=pihole \
+--network host \
+--hostname=pihole \
+--no-healthcheck \
+--restart=unless-stopped \
+--cap-add=NET_ADMIN \
+--privileged \
+-e INTERFACE=wlxd03745867865 \
+-e DNSMASQ_LISTENING=single \
+-e SERVERIP=127.0.0.1 \
+-e WEBPASSWORD="*****" \
+-v /etc/localtime:/etc/localtime:ro \
+-v /srv/containers/pihole/etc/:/etc/pihole \
+-v /srv/containers/pihole/dnsmasq.d/:/etc/dnsmasq.d \
+pihole/pihole:latest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Edit /etc/NetworkManager/NetworkManager.conf:
 [main]
@@ -48,6 +160,7 @@ network:
           mode: ap
   version: 2
 
+IF INSTALLED NETWORK-MANAGER!
 # (4) # Remove DNSMASQ
 sudo apt purge dnsmasq-base
 sudo killall dnsmasq
@@ -57,31 +170,7 @@ Set IP and Gateway 192.168.4.1...etc.
 Create and add to /srv/containers/pihole/dnsmasq.d/99-dns-bind.conf :
 bind-interfaces
 
-# (5) # PiHole
 
-sudo usermod -aG docker ubuntu
-
-sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
-
-docker stop pihole
-docker rm pihole
-
-docker run -d \
---name=pihole \
---network host \
---hostname=pihole \
---no-healthcheck \
---restart=unless-stopped \
---cap-add=NET_ADMIN \
---privileged \
--e INTERFACE=wlxd03745867865 \
--e DNSMASQ_LISTENING=single \
--e SERVERIP=127.0.0.1 \
--e WEBPASSWORD="*****" \
--v /etc/localtime:/etc/localtime:ro \
--v /srv/containers/pihole/etc/:/etc/pihole \
--v /srv/containers/pihole/dnsmasq.d/:/etc/dnsmasq.d \
-pihole/pihole:latest
 
 # (6) # Inside PiHole
 
@@ -90,53 +179,3 @@ Set DHCP Server and set a new router, maybe 192.168.4.254
 Profit!
 
 
-
-sudo apt-get install hostapd
-
-sudo systemctl unmask hostapd
-sudo systemctl enable hostapd
-
-sudo nano /etc/hostapd/hostapd.conf
-
-wpa_passphrase=5V06auso
-ssid=ctOS PiHole
-interface=wlxd03745867865
-driver=nl80211
-hw_mode=g
-channel=1
-ieee80211d=1
-country_code=DE
-ieee80211n=1
-wmm_enabled=1
-macaddr_acl=0
-auth_algs=1
-ignore_broadcast_ssid=0
-wpa=2
-wpa_key_mgmt=WPA-PSK
-rsn_pairwise=CCMP
-
-sudo nano /etc/default/hostapd
-DAEMON_CONF="/etc/hostapd/hostapd.conf"
-
-network:
-    version: 2
-    ethernets:
-       eth0:
-          dhcp4: false
-          dhcp6: false
-       wlan0:
-          dhcp4: false
-          dhcp6: false
-    bridges:     
-        br0:
-          interfaces: [eth0,wlan0]
-          addresses: [yourStaticAddressofPi/yournetmask]
-          routes:
-            - to: default
-              via: yourdefaultgatewayaddress
-          mtu: 1500
-          nameservers:
-            search: [yourlocaldomain.lan]
-            addresses: [yourIP4addressforDNSserver]
-          dhcp4: no
-          dhcp6: no
