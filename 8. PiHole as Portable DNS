@@ -105,4 +105,15 @@ TURN ON DHCP ON PIHOLE because NetPlan doesn't have it!!
 Set IP and Gateway: 192.168.4.1
 Pool: 192.168.4.10 to 192.168.4.200
 
-Profit!
+### On IPTABLES:
+
+(Special attention to interfaces here, being wlxd03745867865 the main one!)
+
+sudo iptables -A FORWARD -i eth0 -o wlxd03745867865 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlxd03745867865 -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i enx001e101f0000 -o wlxd03745867865 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlxd03745867865 -o enx001e101f0000 -j ACCEPT
+sudo iptables -A FORWARD -i wlxd037457c32f3 -o wlxd03745867865 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlxd03745867865 -o wlxd037457c32f3 -j ACCEPT
+sudo netplan apply
+sudo reboot
