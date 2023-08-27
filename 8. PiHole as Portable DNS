@@ -80,12 +80,14 @@ sudo usermod -aG docker ubuntu
 
 sudo mkdir -p /srv/containers/pihole/{etc,dnsmasq.d}
 
-nano pihole:
 docker stop pihole
 docker rm pihole
+
 docker run -d \
 --name=pihole \
 --network host \
+--dns 1.0.0.1 \
+--dns 8.8.4.4 \
 --hostname=pihole \
 --no-healthcheck \
 --restart=unless-stopped \
@@ -94,81 +96,14 @@ docker run -d \
 -e INTERFACE=wlxd03745867865 \
 -e DNSMASQ_LISTENING=single \
 -e SERVERIP=127.0.0.1 \
--e WEBPASSWORD="*****" \
+-e WEBPASSWORD="******" \
 -v /etc/localtime:/etc/localtime:ro \
 -v /srv/containers/pihole/etc/:/etc/pihole \
 -v /srv/containers/pihole/dnsmasq.d/:/etc/dnsmasq.d \
 pihole/pihole:latest
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Edit /etc/NetworkManager/NetworkManager.conf:
-[main]
-plugins=ifupdown,keyfile
-dns=none
-
-# (3) # To /etc/netplan/50-cloud-init.yaml:
-
-network:
-  ethernets:
-    eth0:
-      dhcp4: true
-      optional: true
-  wifis:
-    renderer: NetworkManager
-    wlxd037457c32f3:
-      dhcp4: true
-      optional: true
-      access-points:
-        "Apto 300 A":
-          password: "******"
-    wlxd03745867865:
-      dhcp4: true
-      addresses:
-      - 192.168.4.1/24
-      optional: true
-      access-points:
-        "ctOS PiHole":
-          password: "******"
-          mode: ap
-  version: 2
-
-IF INSTALLED NETWORK-MANAGER!
-# (4) # Remove DNSMASQ
-sudo apt purge dnsmasq-base
-sudo killall dnsmasq
 TURN ON DHCP ON PIHOLE!
-Set IP and Gateway 192.168.4.1...etc.
-
-Create and add to /srv/containers/pihole/dnsmasq.d/99-dns-bind.conf :
-bind-interfaces
-
-
-
-# (6) # Inside PiHole
-
-Set DHCP Server and set a new router, maybe 192.168.4.254
+Set IP and Gateway: 192.168.4.1
+Pool: 192.168.4.10 to 192.168.4.200
 
 Profit!
-
-
