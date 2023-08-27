@@ -88,6 +88,9 @@ network:
       dhcp4: no
       dhcp6: no
 
+# routes = gateway4!
+# addresses = dns!
+
 # (6) # PiHole
 
 sudo usermod -aG docker ubuntu
