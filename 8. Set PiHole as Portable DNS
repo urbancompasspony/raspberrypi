@@ -34,7 +34,7 @@ sudo systemctl enable hostapd
 
 sudo nano /etc/hostapd/hostapd.conf
 
-ssid=ctOS PiHole
+ssid=ctOS_PiHole
 wpa_passphrase=5V06auso
 interface=wlxd03745867865
 driver=nl80211
@@ -53,6 +53,16 @@ rsn_pairwise=CCMP
 
 sudo nano /etc/default/hostapd
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+# (5) # Edit and add /etc/sysctl.conf
+
+net.ipv4.ip_forward=1
+#Disable IP6 entirely
+net.ipv6.conf.all.disable_ipv6=1
+net.ipv6.conf.default.disable_ipv6=1
+net.ipv6.conf.eth0.disable_ipv6=1
+
+sudo reboot
 
 # (5) # Edit netplan:
 
