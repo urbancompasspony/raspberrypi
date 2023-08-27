@@ -67,6 +67,13 @@ network:
     wlxd03745867865:
       dhcp4: false
       dhcp6: false
+  wifis:
+    wlxd037457c32f3:
+      dhcp4: true
+      optional: true
+      access-points:
+        "Apto 300 A":
+          password: "******"
   bridges:
     br0:
       interfaces: [enx001e101f0000,wlxd03745867865]
