@@ -70,7 +70,6 @@ network:
   wifis:
     wlxd037457c32f3:
       dhcp4: true
-      optional: true
       access-points:
         "Apto 300 A":
           password: "******"
@@ -83,10 +82,9 @@ network:
           via: 192.168.4.1
       mtu: 1500
       nameservers:
-        search: [pihole.lan]
         addresses: [192.168.4.1]
-      dhcp4: no
-      dhcp6: no
+      dhcp4: true
+      dhcp6: false
 
 # routes = gateway4!
 # addresses = dns!
