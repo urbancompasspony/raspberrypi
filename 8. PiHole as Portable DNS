@@ -1,11 +1,11 @@
-### For Ubuntu Server
-
 ## Drivers for rtl8192eu-linux
 sudo apt install linux-headers-generic build-essential dkms git
 git clone https://github.com/clnhub/rtl8192eu-linux
 cd rtl8192eu-linux
 nano Makefile (CONFIG_WIFI_MONITOR to y and CONFIG_PLATFORM_ARM_AARCH64 to y; change CONFIG_PLATFORM_I386_PC to n)
 sudo ./install_wifi.sh
+
+### For Ubuntu Server
 
 sudo apt install network-manager
 sudo apt purge dnsmasq-base
