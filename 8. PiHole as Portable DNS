@@ -4,10 +4,10 @@ sudo apt install network-manager
 sudo apt purge dnsmasq-base
 sudo killall dnsmasq
 
-$ sudo systemctl stop systemd-resolved
-$ sudo systemctl disable systemd-resolved
-$ sudo systemctl mask systemd-resolved
-$ sudo unlink /etc/resolv.conf
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+sudo systemctl mask systemd-resolved
+sudo unlink /etc/resolv.conf
 
 Then edit /etc/resolv.conf creating a new file and put this inside:
 nameserver 127.0.0.1
@@ -70,6 +70,8 @@ network:
           mode: ap
   version: 2
 
+sudo iptables -F
+sudo iptables -X
 sudo iptables -A OUTPUT -j ACCEPT -m comment --comment "Accept all outgoing"
 sudo iptables -A INPUT -j ACCEPT -m comment --comment "Accept all incoming"
 sudo iptables -A FORWARD -j ACCEPT -m comment --comment "Accept all forwarded"
