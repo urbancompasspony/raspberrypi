@@ -28,6 +28,8 @@ rsn_pairwise=CCMP
 ssid=NAME_HERE
 wpa_passphrase=PASSWORD_HERE
 
+#ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
+
 sudo nano /etc/default/hostapd
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
