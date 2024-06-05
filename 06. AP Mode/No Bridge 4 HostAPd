@@ -38,25 +38,27 @@ wpa_passphrase=PASSWORD_HERE
 
 #ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
 
-sudo nano /etc/network/interfaces
-hostapd /etc/hostapd/hostapd.conf
+sudo nano /etc/rc.local
+ifconfig wlan0 192.168.4.1
+systemctl restart hostapd
 
 sudo systemctl unmask hostapd; sudo systemctl enable hostapd; sudo systemctl start hostapd
 
-# RUN EVERYTHING SCRIPT OR THESE:
+# RUN EVERYTHING, OR THESE:
 
 sudo iptables -F; sudo iptables -X
 sudo iptables -A OUTPUT -j ACCEPT -m comment --comment "Accept all outgoing"
 sudo iptables -A INPUT -j ACCEPT -m comment --comment "Accept all incoming"
 sudo iptables -A FORWARD -j ACCEPT -m comment --comment "Accept all forwarded"
 
-# PERMANENT
+# PERMANENT?
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
-sudo nano /etc/rc.local
+sudo nano /etc/rc.local, add:
 iptables-restore < /etc/iptables.ipv4.nat
 
 reboot
+
 
 DEPRECATED!
 #sudo nano /etc/default/hostapd
