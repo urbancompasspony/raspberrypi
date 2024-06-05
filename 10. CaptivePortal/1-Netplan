@@ -14,6 +14,6 @@ network:
       optional: true
       access-points:
         "ctOS CPD":
-          password: "5V06@uso"
+          password: "p4ss0rd"
           mode: ap
   version: 2
