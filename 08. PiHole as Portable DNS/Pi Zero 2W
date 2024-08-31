@@ -54,6 +54,11 @@ rsn_pairwise=CCMP
 sudo nano /etc/default/hostapd
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
+sudo nano /etc/systemd/system/multi-user.target.wants/hostapd.service
+Add
+ExecStartPre=/bin/sleep 15
+to [service]
+
 sudo systemctl enable --now dhcpcd
 sudo systemctl enable --now hostapd
 
