@@ -61,3 +61,6 @@ sudo systemctl enable --now dhcpcd
 sudo systemctl enable --now hostapd
 
 sudo systemctl reboot
+
+Source:
+https://forums.raspberrypi.com/viewtopic.php?t=234145
