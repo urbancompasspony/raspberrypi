@@ -4,7 +4,7 @@
 
 # Install PiHole:
 curl -sSL https://install.pi-hole.net | bash
-Set Interface to wlan0
+Set Interface to wlan0, the only one btw, not all!
 SKIP to set IP and Gateway. We will set it later!
 
 On PiHole, change to listen only to WLAN0 and uncheck all under "Advanced DNS settings"
