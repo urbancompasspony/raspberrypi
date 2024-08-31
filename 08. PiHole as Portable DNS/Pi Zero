@@ -1,5 +1,15 @@
 [ Using RPI-IMAGER is not recommended - Maybe crash this!!! ]
 
+# Update + Upgrade
+
+# Install PiHole:
+curl -sSL https://install.pi-hole.net | bash
+Set Interface to wlan0, the only one btw, not all!
+SKIP to set IP and Gateway. We will set it later!
+
+On PiHole, change to listen only to WLAN0 (Respond only on interface wlan0) and uncheck all under "Advanced DNS settings"
+Turn on DHCP and set IP to 192.168.4.10 to 192.168.4.200, gateway to 192.168.4.1
+
 sudo apt install -y hostapd dnsmasq
 sudo DEBIAN_FRONTEND=noninteractive apt install -y netfilter-persistent iptables-persistent
 
