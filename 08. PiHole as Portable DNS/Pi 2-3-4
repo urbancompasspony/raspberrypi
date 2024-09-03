@@ -47,6 +47,7 @@ net.ipv6.conf.eth0.disable_ipv6=1
 sudo nano /etc/netplan TAB:
 
 network:
+  renderer: NetworkManager
   ethernets:
     eth0:
       dhcp4: true
@@ -57,7 +58,6 @@ network:
       dhcp6: false
       optional: true
   wifis:
-    renderer: NetworkManager
     wlxd037457c32f3:
       dhcp4: true
       dhcp6: false
