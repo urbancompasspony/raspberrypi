@@ -1,0 +1,5 @@
+sudo nano /etc/systemd/system/multi-user.target.wants/NetworkManager.service
+
+add
+ExecStartPre=/bin/sleep 15
+to [SERVICE]
