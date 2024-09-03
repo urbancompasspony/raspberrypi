@@ -1,14 +1,17 @@
+    renderer: NetworkManager
+AS MAIN ONE!!!!!
+
 WIFI USB:
 sudo apt install firmware-ath9k-htc firmware-b43-installer linux-modules-extra-raspi network-manager
 
 network:
+  renderer: NetworkManager
   version: 2
   ethernets:
     eth0:
       dhcp4: true
       optional: true
   wifis:
-  renderer: NetworkManager
     wlan0:
       dhcp4: true
       addresses:
