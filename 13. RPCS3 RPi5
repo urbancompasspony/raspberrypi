@@ -1,0 +1,3 @@
+
+Wayland?
+QT_QPA_PLATFORM=xcb ./rpcs3.appimage
