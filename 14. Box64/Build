@@ -1,1 +1,22 @@
 
+sudo apt install git build-essential cmake
+
+git clone https://github.com/ptitSeb/box64.git
+
+cd ~/box64
+mkdir build
+cd build
+
+4k page size and x86
+cmake .. -DRPI4ARM64=1 -DBOX32=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+16k page size
+cmake .. -DRPI5ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+make -j$(nproc)
+
+sudo make install
+
+sudo systemctl restart systemd-binfmt
+or
+reboot
