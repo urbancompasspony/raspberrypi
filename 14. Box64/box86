@@ -1,7 +1,0 @@
-sudo apt install gcc-arm-linux-gnueabihf -y
-cd ~/projects
-git clone https://github.com/ptitSeb/box86
-cd box86
-mkdir build; cd build; cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX:PATH=/opt/box86
-make -j2
-sudo make install
