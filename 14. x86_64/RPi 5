@@ -29,25 +29,3 @@ export BOX64_LD_LIBRARY_PATH=/opt/wine64/lib/i386-unix/:/opt/wine64/lib/wine/x86
 sudo curl -fsSL https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -o /usr/local/bin/winetricks
 sudo chmod +x /usr/local/bin/winetricks
 sudo winetricks --self-update
-
-
-
-
-
-
-
-
-
-WINEPREFIX=~/.wine WINEARCH=win32 wine winecfg
-WINEPREFIX=~/.wine64 WINEARCH=win64 wine winecfg
-
-FONTS
-shopt -s globstar
-cd ${WINEPREFIX:-~/.wine}/drive_c/windows/Fonts && for i in /usr/share/fonts/**/*.{ttf,otf} ; do ln -s "$i" ; done
-
-MIME HOOKS
-rm -f ~/.local/share/mime/packages/x-wine*
-rm -f ~/.local/share/applications/wine-extension*
-rm -f ~/.local/share/icons/hicolor/*/*/application-x-wine-extension*
-rm -f ~/.local/share/mime/application/x-wine-extension*
-rm -f ~/.local/share/icons/hicolor/*/*/*winebrowser*
