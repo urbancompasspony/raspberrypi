@@ -1,5 +1,6 @@
 
-Raspberry Pi OS? Or EndeavourOS?
+Raspberry Pi OS only!
+Or Ubuntu-based Desktop.
 
 sudo dpkg --add-architecture armhf
 sudo apt update
