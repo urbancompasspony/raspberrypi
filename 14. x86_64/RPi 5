@@ -5,19 +5,14 @@ Or Ubuntu-based Desktop.
 sudo dpkg --add-architecture armhf; sudo apt update; sudo apt upgrade -y
 sudo apt install gcc-arm-linux-gnueabihf git build-essential cmake libgtk2.0-0:armhf libsdl2-image-2.0-0:armhf libsdl1.2debian:armhf libopenal1:armhf libvorbisfile3:armhf libgl1:armhf libjpeg62:armhf libcurl4:armhf libasound2-plugins:armhf -y
 
-cd ~/box64
 git clone https://github.com/ptitSeb/box64
-cd box64
-mkdir build; cd build; cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX:PATH=/opt/box64
+cd box64; mkdir build; cd build; cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX:PATH=/opt/box64
 make -j$(nproc)
 sudo make install
 sudo systemctl restart systemd-binfmt
--DBOX32=1 ?
 
-cd ~/box86
 git clone https://github.com/ptitSeb/box86
-cd box86
-mkdir build; cd build; cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX:PATH=/opt/box86
+cd box86; mkdir build; cd build; cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX:PATH=/opt/box86
 make -j$(nproc)
 sudo make install
 sudo systemctl restart systemd-binfmt
@@ -25,6 +20,7 @@ sudo systemctl restart systemd-binfmt
 curl -fsSLO https://www.playonlinux.com/wine/binaries/phoenicis/upstream-linux-amd64/PlayOnLinux-wine-6.17-upstream-linux-amd64.tar.gz
 sudo mkdir /opt/wine
 sudo tar -zxf PlayOnLinux-wine-6.17-upstream-linux-amd64.tar.gz -C /opt/wine
+
 sudo ln -s /opt/wine/bin/wine /usr/local/bin/wine
 sudo ln -s /opt/wine/bin/wine64 /usr/local/bin/wine64
 sudo ln -s /opt/wine/bin/wineserver /usr/local/bin/wineserver
@@ -40,6 +36,14 @@ sudo curl -fsSL https://raw.githubusercontent.com/Winetricks/winetricks/master/s
 sudo chmod +x /usr/local/bin/winetricks
 sudo winetricks --self-update
 
+
+
+
+
+
+
+
+
 WINEPREFIX=~/.wine WINEARCH=win32 wine winecfg
 WINEPREFIX=~/.wine64 WINEARCH=win64 wine winecfg
 
@@ -54,3 +58,4 @@ rm -f ~/.local/share/icons/hicolor/*/*/application-x-wine-extension*
 rm -f ~/.local/share/mime/application/x-wine-extension*
 rm -f ~/.local/share/icons/hicolor/*/*/*winebrowser*
 
+-DBOX32=1 ?
