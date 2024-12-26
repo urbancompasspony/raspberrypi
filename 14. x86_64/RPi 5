@@ -11,12 +11,6 @@ make -j$(nproc)
 sudo make install
 sudo systemctl restart systemd-binfmt
 
-git clone https://github.com/ptitSeb/box86
-cd box86; mkdir build; cd build; cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX:PATH=/opt/box86
-make -j$(nproc)
-sudo make install
-sudo systemctl restart systemd-binfmt
-
 curl -fsSLO https://www.playonlinux.com/wine/binaries/phoenicis/upstream-linux-amd64/PlayOnLinux-wine-6.17-upstream-linux-amd64.tar.gz
 sudo mkdir /opt/wine
 sudo tar -zxf PlayOnLinux-wine-6.17-upstream-linux-amd64.tar.gz -C /opt/wine
@@ -57,5 +51,3 @@ rm -f ~/.local/share/applications/wine-extension*
 rm -f ~/.local/share/icons/hicolor/*/*/application-x-wine-extension*
 rm -f ~/.local/share/mime/application/x-wine-extension*
 rm -f ~/.local/share/icons/hicolor/*/*/*winebrowser*
-
--DBOX32=1 ?
