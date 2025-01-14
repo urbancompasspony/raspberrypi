@@ -11,7 +11,7 @@ make -j$(nproc)
 sudo make install
 sudo systemctl restart systemd-binfmt
 
-curl -fsSLO https://www.playonlinux.com/wine/binaries/phoenicis/upstream-linux-amd64/PlayOnLinux-wine-6.17-upstream-linux-amd64.tar.gz
+https://github.com/Kron4ek/Wine-Builds/releases/  (...)
 sudo mkdir /opt/wine
 sudo tar -zxf PlayOnLinux-wine-6.17-upstream-linux-amd64.tar.gz -C /opt/wine
 
