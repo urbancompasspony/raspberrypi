@@ -1,2 +1,0 @@
-sudo apt purge docker.io avahi-daemon lvm2
-sudo systemctl disable apt-daily.timer apt-daily-upgrade.timer; sudo systemctl mask apt-daily.timer apt-daily-upgrade.timer
