@@ -1,3 +1,4 @@
+Set:
 ssh-keygen
 ssh-copy-id user@server
 
