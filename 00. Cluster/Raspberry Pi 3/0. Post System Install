@@ -1,8 +1,11 @@
-sudo apt purge docker.io avahi-daemon lvm2 update-notifier-common
-sudo systemctl disable apt-daily.timer apt-daily-upgrade.timer; sudo systemctl mask apt-daily.timer apt-daily-upgrade.timer
+
+sudo apt purge docker.io avahi-daemon lvm2 update-notifier-common apport apport-symptoms wpasupplicant apparmor ufw -y; sudo apt autoremove
+
+sudo systemctl disable apt-daily.timer apt-daily-upgrade.timer e2scrub; sudo systemctl mask apt-daily.timer apt-daily-upgrade.timer e2scrub
+sudo systemctl disable e2scrub_all.timer e2scrub_reap.service; sudo systemctl mask e2scrub_all.timer e2scrub_reap.service
 
 sudo swapoff -a
-edit /etc/fstab and remove!
+and remove from /etc/fstab
 
 Config CGROUPS; if a FATA[0000] failed to find memory cgroup (v2) error surfaces during the installation of k3s
 
