@@ -1,4 +1,4 @@
-sudo apt purge docker.io avahi-daemon lvm2
+sudo apt purge docker.io avahi-daemon lvm2 update-notifier-common
 sudo systemctl disable apt-daily.timer apt-daily-upgrade.timer; sudo systemctl mask apt-daily.timer apt-daily-upgrade.timer
 
 sudo swapoff -a
