@@ -1,7 +1,7 @@
 
-sudo apt purge docker.io avahi-daemon lvm2 update-notifier-common apport apport-symptoms wpasupplicant apparmor ufw -y; sudo apt autoremove
+sudo apt purge docker.io avahi-daemon lvm2 update-notifier-common apport apport-symptoms wpasupplicant apparmor ufw network-manager; sudo apt autoremove
 
-sudo systemctl disable apt-daily.timer apt-daily-upgrade.timer e2scrub; sudo systemctl mask apt-daily.timer apt-daily-upgrade.timer e2scrub
+sudo systemctl disable apt-daily.timer apt-daily-upgrade.timer e2scrub; sudo systemctl mask apt-daily.timer apt-daily-upgrade.timer e2scrub 
 sudo systemctl disable e2scrub_all.timer e2scrub_reap.service; sudo systemctl mask e2scrub_all.timer e2scrub_reap.service
 
 sudo swapoff -a
