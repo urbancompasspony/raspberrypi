@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export list01="net-tools speedtest-cli whois netdiscover iperf arp-scan traceroute sshpass zip unzip p7zip-full 7zip p7zip cifs-utils iotop btop inxi tree dialog build-essential unrar curl"
+export list01="net-tools speedtest-cli whois netdiscover iperf arp-scan traceroute sshpass zip unzip p7zip-full 7zip p7zip cifs-utils iotop tree dialog unrar curl"
 
 # ======================================================================================================================================================== #
 
