@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+export list01="net-tools speedtest-cli whois netdiscover iperf arp-scan traceroute sshpass zip unzip p7zip-full 7zip p7zip cifs-utils iotop btop inxi tree dialog build-essential unrar curl"
+
+# ======================================================================================================================================================== #
+
+function root_check0 {
+  [ "$EUID" -ne 0 ] || {
+    clear
+    echo "Não execute este script como Root! DICA: Remova o SUDO do comando ou execute-o como usuario local."; echo ""
+    exit
+  }
+}
+
+function welcome0 {
+  clear; echo ""; echo "Preparo de Servidor $1 by SuitIT®"; echo ""
+  echo "Insira a senha padrao: ubuntu"; echo ""
+  sudo echo . >/dev/null
+  echo ""; echo "5"; sleep 1; echo "4"; sleep 1; echo "3"; sleep 1; echo "2"; sleep 1; echo "1"; sleep 1
+}
+
+function bashconf0 {
+  clear; echo "Preparando sistema e configurando BASH"; echo ""
+  curl -sSL https://raw.githubusercontent.com/urbancompasspony/bashrc/main/install.sh | bash
+  . .bashrc
+}
+
+function timezone0 {
+  sudo timedatectl set-timezone Etc/GMT+3
+  sudo timedatectl set-local-rtc 1
+}
+
+function useless0 {
+  clear; echo "Removendo pacotes e desativando servicos inuteis"; echo ""
+  sudo apt purge needrestart cloud-init snapd unattended-upgrades plank deja-dup evolution evolution-data-server bluez blueman bluetooth -y
+  sudo systemctl disable systemd-networkd-wait-online.service; sudo systemctl mask systemd-networkd-wait-online.service
+}
+
+function update_arm {
+  clear; echo "Atualizando o sistema"; echo ""
+  sudo apt update; sudo apt upgrade -y; sudo apt autoremove -y; clear
+
+  sudo apt install $list01
+  sync
+}
+
+function sysctl0 {
+    sleep 3; clear; echo "Aplicando recursos extras ao SYSCTL"
+    echo -e "kernel.sysrq=1
+vm.panic_on_oom=1
+vm.swappiness=10
+kernel.panic=5
+#net.ipv4.ip_forward=1
+#net.ipv6.conf.all.disable_ipv6=1
+#net.ipv6.conf.default.disable_ipv6=1" | sudo tee -a /etc/sysctl.conf &&
+    sudo touch "$pathsrv"/sysctl_ok
+}
+
+# ======================================================================================================================================================== #
+
+root_check0
+welcome0 "Cluster K3s"
+bashconf0
+timezone0
+useless0
+update_arm
+sysctl0
+
+sudo reboot
+
+exit 1
