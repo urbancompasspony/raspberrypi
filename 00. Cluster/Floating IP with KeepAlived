@@ -1,0 +1,33 @@
+sudo apt update && sudo apt install -y keepalived
+
+Primário:
+sudo nano /etc/keepalived/keepalived.conf
+
+vrrp_script check_pihole {
+  script "/usr/bin/curl -s http://localhost:32080 > /dev/null"
+  interval 2
+  weight 2
+}
+
+vrrp_instance VI_1 {
+  state MASTER
+  interface eth0
+  virtual_router_id 51
+  priority 101
+  advert_int 1
+  authentication {
+    auth_type PASS
+    auth_pass pihole123
+  }
+  virtual_ipaddress {
+    192.168.1.240/24
+  }
+  track_script {
+    check_pihole
+  }
+}
+
+Nos nós secundários, use uma configuração similar, mas mude state para BACKUP e priority para um valor menor como 100.
+
+sudo systemctl enable keepalived; sudo systemctl start keepalived
+
