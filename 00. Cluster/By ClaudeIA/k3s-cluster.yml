@@ -57,7 +57,7 @@
         state: directory
         mode: '0755'
 
-    - name: Configurar keepalived para master
+    - name: Configurar keepalived (master)
       template:
         src: keepalived-master.conf.j2
         dest: /etc/keepalived/keepalived.conf
@@ -86,7 +86,7 @@
         state: directory
         mode: '0755'
 
-    - name: Configurar keepalived para backup
+    - name: Configurar keepalived (worker)
       template:
         src: keepalived-backup.conf.j2
         dest: /etc/keepalived/keepalived.conf
