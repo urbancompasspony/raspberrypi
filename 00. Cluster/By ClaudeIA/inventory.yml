@@ -15,8 +15,8 @@ all:
           ansible_host: 172.20.0.63
   vars:
     ansible_user: administrador
-    ansible_password: 13A08a93b
-    ansible_become_password: 13A08a93b
+    ansible_password: 123456
+    ansible_become_password: 123456
     ansible_python_interpreter: /usr/bin/python3
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
     k3s_version: v1.27.5+k3s1
