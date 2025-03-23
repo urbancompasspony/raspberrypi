@@ -1,4 +1,8 @@
 openssl rand -hex 32
 
+To configure:
 ansible-playbook -i inventory.yml k3s-cluster.yml
 ansible-playbook -i inventory.yml pihole.yml
+
+To remove everything:
+ansible-playbook -i inventory.yml cleanup-k3s.yml
