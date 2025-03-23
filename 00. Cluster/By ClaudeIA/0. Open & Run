@@ -8,3 +8,5 @@ ansible-playbook -i inventory.yml pihole.yml
 
 To remove everything:
 ansible-playbook -i inventory.yml cleanup-k3s.yml
+
+ansible-playbook -i inventory.yml shutdown.yaml
