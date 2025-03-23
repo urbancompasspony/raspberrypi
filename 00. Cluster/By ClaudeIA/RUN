@@ -1,0 +1,4 @@
+openssl rand -hex 32
+
+ansible-playbook -i inventory.yml k3s-cluster.yml
+ansible-playbook -i inventory.yml pihole.yml
