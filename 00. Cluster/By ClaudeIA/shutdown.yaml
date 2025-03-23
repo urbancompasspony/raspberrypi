@@ -1,0 +1,7 @@
+---
+- name: Desligar geral
+  hosts: all
+  become: true
+  tasks:
+    - name: Executar shutdown
+      command: /sbin/shutdown -h now
