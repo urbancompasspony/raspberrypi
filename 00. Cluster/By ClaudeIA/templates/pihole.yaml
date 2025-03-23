@@ -1,0 +1,162 @@
+---
+- name: Implantar Pi-hole no cluster K3s
+  hosts: master
+  become: true
+  tasks:
+    - name: Criar namespace para Pi-hole
+      kubernetes.core.k8s:
+        name: pihole
+        kind: Namespace
+        state: present
+
+    - name: Implantar configmap de configurações do Pi-hole
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: pihole-config
+            namespace: pihole
+          data:
+            TZ: "America/Sao_Paulo"
+            WEBPASSWORD: "senha-pihole-segura"
+            DNS1: "1.1.1.1"
+            DNS2: "1.0.0.1"
+
+    - name: Implantar PersistentVolume para Pi-hole
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: PersistentVolume
+          metadata:
+            name: pihole-data
+          spec:
+            capacity:
+              storage: 1Gi
+            accessModes:
+              - ReadWriteOnce
+            hostPath:
+              path: /data/pihole
+            storageClassName: local-storage
+
+    - name: Implantar PersistentVolumeClaim para Pi-hole
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: PersistentVolumeClaim
+          metadata:
+            name: pihole-data
+            namespace: pihole
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 1Gi
+            storageClassName: local-storage
+
+    - name: Implantar deployment do Pi-hole
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: pihole
+            namespace: pihole
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: pihole
+            template:
+              metadata:
+                labels:
+                  app: pihole
+              spec:
+                containers:
+                  - name: pihole
+                    image: pihole/pihole:latest
+                    ports:
+                      - containerPort: 80
+                        name: http
+                      - containerPort: 53
+                        name: dns
+                        protocol: TCP
+                      - containerPort: 53
+                        name: dns-udp
+                        protocol: UDP
+                      - containerPort: 67
+                        name: dhcp
+                        protocol: UDP
+                    envFrom:
+                      - configMapRef:
+                          name: pihole-config
+                    volumeMounts:
+                      - name: pihole-data
+                        mountPath: /etc/pihole
+                volumes:
+                  - name: pihole-data
+                    persistentVolumeClaim:
+                      claimName: pihole-data
+
+    - name: Implantar serviço Pi-hole
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: pihole
+            namespace: pihole
+            annotations:
+              metallb.universe.tf/loadBalancerIPs: "{{ virtual_ip }}"
+          spec:
+            type: LoadBalancer
+            ports:
+              - name: http
+                port: 80
+                targetPort: 80
+              - name: dns-tcp
+                port: 53
+                protocol: TCP
+                targetPort: 53
+              - name: dns-udp
+                port: 53
+                protocol: UDP
+                targetPort: 53
+              - name: dhcp
+                port: 67
+                protocol: UDP
+                targetPort: 67
+            selector:
+              app: pihole
+
+    - name: Instalar MetalLB para IP flutuante
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: metallb-system
+
+    - name: Configurar MetalLB
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            namespace: metallb-system
+            name: config
+          data:
+            config: |
+              address-pools:
+              - name: default
+                protocol: layer2
+                addresses:
+                - {{ virtual_ip }}/32
