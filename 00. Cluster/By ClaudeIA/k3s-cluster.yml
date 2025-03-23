@@ -15,8 +15,6 @@
           - iptables
           - nftables
           - keepalived
-          - python3-pip
-          - python3-kubernetes
         state: present
 
     - name: Configurar hostname
