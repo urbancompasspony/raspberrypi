@@ -1,3 +1,4 @@
+sudo kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Pod
 metadata:
@@ -6,6 +7,7 @@ spec:
 containers:
     - name: hello
     image: httpd  # Replace with your desired Docker image
+EOF
 
 kubectl apply -f hello-world-pod.yaml
 
