@@ -159,4 +159,4 @@
               - name: default
                 protocol: layer2
                 addresses:
-                - {{ virtual_ip }}/32
+                - {{ virtual_ip }}/24
