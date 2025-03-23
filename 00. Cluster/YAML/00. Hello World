@@ -9,6 +9,5 @@ containers:
     image: httpd  # Replace with your desired Docker image
 EOF
 
-kubectl apply -f hello-world-pod.yaml
-
-kubectl delete pod hello-world
+to delete:
+sudo kubectl delete pod hello-world
