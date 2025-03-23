@@ -20,7 +20,7 @@
             namespace: pihole
           data:
             TZ: "America/Sao_Paulo"
-            WEBPASSWORD: "senha-pihole-segura"
+            WEBPASSWORD: "password"
             DNS1: "1.1.1.1"
             DNS2: "1.0.0.1"
 
