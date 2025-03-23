@@ -1,0 +1,7 @@
+---
+- name: Reiniciar geral
+  hosts: all
+  become: true
+  tasks:
+    - name: Executar reboot
+      command: /sbin/reboot
