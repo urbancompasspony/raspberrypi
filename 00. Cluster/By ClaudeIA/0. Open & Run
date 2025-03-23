@@ -1,12 +1,25 @@
-!#/bin/bash
-
+Gerar KEY
 openssl rand -hex 32
+
+Prepare system:
+ansible-playbook -i inventory.yml prepare.yml
 
 To configure:
 ansible-playbook -i inventory.yml k3s-cluster.yml
 ansible-playbook -i inventory.yml pihole.yml
 
-To remove everything:
+Remover PiHole:
+ansible-playbook -i inventory.yml pihole-cleanup.yml
+
+Reiniciar:
+ansible-playbook -i inventory.yml reboot.yml
+
+Desligar:
+ansible-playbook -i inventory.yml shutdown.yml
+
+Destroy everything:
 ansible-playbook -i inventory.yml cleanup-k3s.yml
 
-ansible-playbook -i inventory.yml shutdown.yaml
+Se formatar os sistemas:
+Limpar a tabela DHCP Lease do pfSense e:
+ssh-keygen -R 172.20.0.61; ssh-keygen -R 172.20.0.62; ssh-keygen -R 172.20.0.63; ssh-keygen -R 172.20.0.64
