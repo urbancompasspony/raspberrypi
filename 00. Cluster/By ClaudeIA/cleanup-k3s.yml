@@ -63,7 +63,7 @@
       ignore_errors: yes
 
     - name: Remover o IP virtual das interfaces
-      shell: ip addr del {{ virtual_ip }}/32 dev eth0
+      shell: ip addr del {{ virtual_ip }}/24 dev eth0
       ignore_errors: yes
 
     - name: Reiniciar todos os nós
