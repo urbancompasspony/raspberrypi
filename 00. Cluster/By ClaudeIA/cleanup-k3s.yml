@@ -11,11 +11,12 @@
         enabled: no
       ignore_errors: yes
 
-    - name: Parar e remover o K3s em todos os nós
+    - name: Parar e remover o K3s em master
       shell: /usr/local/bin/k3s-uninstall.sh
       ignore_errors: yes
+      when: inventory_hostname in groups['master']
 
-    - name: Parar e remover o K3s-agent em nós worker
+    - name: Parar e remover o K3s-agent em workers
       shell: /usr/local/bin/k3s-agent-uninstall.sh
       ignore_errors: yes
       when: inventory_hostname in groups['workers']
@@ -27,7 +28,6 @@
       with_items:
         - /etc/rancher
         - /var/lib/rancher
-        - /var/lib/kubelet
         - /etc/keepalived
 
     - name: Remover dados persistentes do Pi-hole
@@ -48,24 +48,9 @@
         state: absent
       ignore_errors: yes
 
-    - name: Reativar swap no fstab
-      replace:
-        path: /etc/fstab
-        regexp: '^# (.*?\sswap\s+sw\s+.*)$'
-        replace: '\1'
-      ignore_errors: yes
-
-    - name: Remover parâmetros cgroup do boot
-      lineinfile:
-        path: /boot/cmdline.txt
-        regexp: 'cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1'
-        state: absent
-      ignore_errors: yes
-
     - name: Remover o IP virtual das interfaces
       shell: ip addr del {{ virtual_ip }}/24 dev eth0
       ignore_errors: yes
 
     - name: Reiniciar todos os nós
       reboot:
-        reboot_timeout: 3600
