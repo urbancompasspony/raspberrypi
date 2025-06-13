@@ -1,0 +1,4 @@
+
+Armbian Noble KDE Neon 25.5.1
+
+sudo apt install mesa-vulkan-drivers mesa-utils vulkan-tools
