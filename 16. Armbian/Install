@@ -11,6 +11,11 @@ cronie zip unzip dialog btrfs-progs cifs-utils inxi btop iotop cmatrix parallel 
 tree gparted gnome-disk-utility  audacity thunderbird libreoffice vlc kpat gimp remmina \
 terminator distrobox -y
 
+sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_arm64 -O /usr/local/bin/yq
+sudo chmod +x /usr/local/bin/yq
+
+
+
 > VULKAN
 For Armbian Noble KDE Neon 25.5.1
 sudo apt install mesa-vulkan-drivers mesa-utils vulkan-tools
