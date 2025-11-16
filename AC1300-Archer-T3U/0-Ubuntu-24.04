@@ -2,6 +2,8 @@ For Ubuntu 22.04 LTS and Raspberry Pi 4 (NOT 3!)
 
 sudo apt install network-manager git linux-headers-generic build-essential dkms linux-headers-raspi -y
 
+sudo apt install linux-headers-6.8.0-1031-raspi
+
 sudo apt purge dnsmasq-base -y; sudo killall dnsmasq
 sudo systemctl stop systemd-resolved; sudo systemctl disable systemd-resolved; sudo systemctl mask systemd-resolved; sudo unlink /etc/resolv.conf
 
@@ -24,5 +26,3 @@ sudo dkms build -m rtl88x2bu -v ${VER} # Takes ~3-minutes on a 3B+
 sudo dkms install -m rtl88x2bu -v ${VER}
 
 If ok, reboot!
-
-SOURCE: https://github.com/cilynx/rtl88x2bu
